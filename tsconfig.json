@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "target": "es6",
+    "jsx": "react",
+    "module": "commonjs",
+    "paths": {
+      "@Components": ["src/components"],
+      "@Components/*": ["src/components/*"],
+      "@Pages": ["src/pages"],
+      "@Pages/*": ["src/pages/*"]
+    },
+    "sourceMap": true,
+    "isolatedModules": false,
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["dist", "node_modules"]
+}
