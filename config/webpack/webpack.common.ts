@@ -49,10 +49,12 @@ module.exports = {
     }),
     new CopyPlugin([
       { from: './public/manifest.json' },
+      { from: './public/icon-512.png' },
     ]),
     new WorkboxPlugin.GenerateSW({
       clientsClaim: true,
-      skipWaiting: true
+      skipWaiting: true,
+      cleanupOutdatedCaches: true
     })
   ],
 };

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --config ./config/webpack/webpack.dev.ts --mode development",
     "test": "jest",
-    "build": "webpack --config ./config/webpack/webpack.prod.ts --mode production",
+    "build": "rm -rf /dist && webpack --config ./config/webpack/webpack.prod.ts --mode production",
     "start:dist": "npm run build && http-server dist"
   },
   "keywords": [
