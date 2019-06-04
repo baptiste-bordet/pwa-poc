@@ -7,6 +7,8 @@ import { TODO_STATUS } from "../../modules/todo/constant";
 import { TodoItem } from "../../modules/todo/model";
 import form from "../../modules/form/form";
 import { FORM_NAME } from "../../modules/form/constant";
+import CardItem from "@Components/CardItem";
+import Line from "@Components/Line";
 
 interface ITodo {
   action: typeof todo.actions & typeof form.actions;
@@ -50,8 +52,11 @@ class Todo extends React.Component<ITodo> {
           onChange={(e) => this.handleChangeTodo(e)}
           value={formValues[FORM_NAME.ADD_TODO]}
         />
+
+        <Line />
+
         {todos.map((todo: TodoItem, index: number) =>
-          <p key={index}>{todo.value}</p>
+          <CardItem key={index} text={todo.value} />
         )}
       </div>
     )
