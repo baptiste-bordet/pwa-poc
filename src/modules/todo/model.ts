@@ -1,12 +1,10 @@
 import { MODULE_NAME, TODO_STATUS } from './constant';
 
 export interface TodoState {
-  [MODULE_NAME]?: {
-    todos: Todo[],
-  };
+  todos?: TodoItem[],
 }
 
-export interface Todo {
+export type TodoItem = {
   value: string,
   status: TODO_STATUS
 }

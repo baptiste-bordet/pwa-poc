@@ -1,30 +1,23 @@
 import { createAction, createReducer } from "redux-act";
-import { MODULE_NAME, TODO as T, TODO_STATUS } from "./constant";
-import { TodoState } from "./model";
+import { MODULE_NAME, TODO as T } from "./constant";
+import { TodoItem, TodoState } from "./model";
 import produce from "immer";
 import { set } from 'lodash';
 import selector from './selector';
 
 
 const initState = {
-  [MODULE_NAME]: {
-    todos: [],
-  }
+  todos: [],
 };
 
 // ACTIONS
-const addTodo = createAction(`${MODULE_NAME}/ADD_TODO`);
+const addTodo = createAction<TodoItem>(`${MODULE_NAME}/ADD_TODO`);
 
 
 // REDUCERS
-const _addTodo = (state: TodoState, payload: any) =>
+const _addTodo = (state: TodoState, payload: TodoItem) =>
   produce(state, draft => {
-    const newItem = {
-      value: '',
-      status: TODO_STATUS.TODO
-    };
-    // return set(draft, [MODULE_NAME, 'todos'], state[MODULE_NAME].todos.push(newItem));
-    draft[MODULE_NAME][T.todos].push(newItem);
+    draft[T.todos].unshift(payload);
   });
 
 

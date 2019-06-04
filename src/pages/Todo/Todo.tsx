@@ -2,90 +2,71 @@ import * as React from 'react';
 import { bindActionCreators, Dispatch } from "redux";
 import todo from "../../modules/todo/todo";
 import { connect } from "react-redux";
+import AddTodo from "@Pages/Todo/_AddTodo";
+import { TODO_STATUS } from "../../modules/todo/constant";
+import { TodoItem } from "../../modules/todo/model";
+import form from "../../modules/form/form";
+import { FORM_NAME } from "../../modules/form/constant";
 
 interface ITodo {
-  action: typeof todo.actions;
-  todos: ITodo[];
+  action: typeof todo.actions & typeof form.actions;
+  todos: TodoItem[];
+  formValues: any;
 }
-
-/*let deferredPrompt;
-
-
-
-btnAdd.addEventListener('click', (e) => {
-  // hide our user interface that shows our A2HS button
-  btnAdd.style.display = 'none';
-  // Show the prompt
-  deferredPrompt.prompt();
-  // Wait for the user to respond to the prompt
-  deferredPrompt.userChoice
-    .then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the A2HS prompt');
-      } else {
-        console.log('User dismissed the A2HS prompt');
-      }
-      deferredPrompt = null;
-    });
-});
-
-window.addEventListener('appinstalled', (evt) => {
-  app.logEvent('a2hs', 'installed');
-});*/
-
 
 class Todo extends React.Component<ITodo> {
 
-  state = {
-    deferredPrompt: null,
-    displayAddDesktopButton: false,
-    time: 0,
-  };
+  handleSubmitTodo(e: any) {
+    const { action, formValues } = this.props;
+    const value = formValues[FORM_NAME.ADD_TODO];
 
-  componentWillMount(): void {
-    window.addEventListener('beforeinstallprompt', (e: any) => {
+    e.preventDefault();
 
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
-      e.preventDefault();
+    if(!!value) {
+      action.addTodo({
+        value: formValues[FORM_NAME.ADD_TODO],
+        status: TODO_STATUS.TODO
+      });
+      action.clearForm(FORM_NAME.ADD_TODO);
+    }
+  }
 
-      // Show the prompt
-      e.prompt();
+  handleChangeTodo(e: any) {
+    const { action } = this.props;
 
-      e.userChoice
-        .then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
-          } else {
-            console.log('User dismissed the A2HS prompt');
-          }
-        });
+    action.setForm({
+      name: FORM_NAME.ADD_TODO,
+      value: e.target.value
     });
-
-    setInterval(() => this.setState({time: this.state.time+1}), 1000);
   }
 
   render() {
-    const { action, todos } = this.props;
+    const { formValues, todos } = this.props;
 
     return (
       <div>
-        <h3>{todos.length}</h3>
-        <button onClick={() => action.addTodo()}>Add todo</button>
-
-        <h2>{this.state.time} sec</h2>
+        <AddTodo
+          onSubmit={(e) => this.handleSubmitTodo(e)}
+          onChange={(e) => this.handleChangeTodo(e)}
+          value={formValues[FORM_NAME.ADD_TODO]}
+        />
+        {todos.map((todo: TodoItem, index: number) =>
+          <p key={index}>{todo.value}</p>
+        )}
       </div>
     )
   }
-
 }
 
 const mapStateToProps = state => ({
-  todos: todo.selector.getTodos(state)
+  todos: todo.selector.getTodos(state),
+  formValues: form.selector.getFormValues(state)
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   action: bindActionCreators(
     {
-      ...todo.actions
+      ...todo.actions,
+      ...form.actions,
     },
     dispatch,
   )
