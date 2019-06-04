@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 20px 30%;
     
     @media (max-width: 700px) {
-      padding: 0 10px;
+      padding: 20px 10px;
     }
   }
 `;
