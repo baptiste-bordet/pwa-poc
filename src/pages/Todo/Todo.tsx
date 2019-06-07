@@ -32,6 +32,19 @@ class Todo extends React.Component<ITodo> {
     });
   }
 
+  componentDidMount(): void {
+    setInterval(() => {
+      const { action, todos } = this.props;
+      const toSynchronize = [];
+
+      todos.forEach((todo: TodoItem) => {
+        if (!todo.id) toSynchronize.push(todo)
+      });
+
+      toSynchronize.length > 0 && action.synchronize(toSynchronize);
+    }, 10000);
+  }
+
   handleSubmitTodo(e: any) {
     const { action, formValues } = this.props;
     const value = formValues[FORM_NAME.ADD_TODO];

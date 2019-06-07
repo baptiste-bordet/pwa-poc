@@ -14,6 +14,7 @@ const initState = {
 const setTodos = createAction<TodoItem[]>(`${MODULE_NAME}/SET_TODOS`);
 const addTodo = createAction<TodoItem>(`${MODULE_NAME}/ADD_TODO`);
 const storeTodo = createAction<TodoItem>(`${MODULE_NAME}/STORE_TODO`);
+const synchronize = createAction<TodoItem[]>(`${MODULE_NAME}/SYNCHRONIZE`);
 
 
 // REDUCERS
@@ -42,5 +43,6 @@ export default {
     setTodos,
     storeTodo,
     addTodo,
+    synchronize,
   }
 }

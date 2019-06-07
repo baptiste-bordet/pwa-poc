@@ -11,7 +11,7 @@ import store from "./store";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: #f1f1f1;
+    background: #1C1E2A;
     padding: 20px 30%;
     font-family: -apple-system, BlinkMacSystemFont, 
     "Segoe UI", "Roboto", "Oxygen", 

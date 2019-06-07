@@ -8,9 +8,9 @@ interface ICardItem {
 const Card = styled.div`
   margin: 5px 0;
   padding: 10px;
-  border-radius: 5px;
   box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1);
-  background: #FFFFFF;
+  background: #2C3142;
+  color: #FFFFFF;
 `;
 
 const CardItem = ({ text }: ICardItem) => {

@@ -9,7 +9,12 @@ interface IButton {
 const StyledButton = styled.button`
   margin-left: 10px;
   padding: 10px;
-  border-radius: 5px;
+  border: none;
+  border-radius: 2px;
+  
+  &:focus {
+    outline-width: 0;
+  }
 `;
 
 const Button = ({ label, type }: IButton) => {

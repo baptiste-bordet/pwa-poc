@@ -14,9 +14,20 @@ app.get('/todos', function (req, res) {
   res.json(TodoHandler.originTodos);
 });
 
+app.post('/todos', function (req, res) {
+  console.log(JSON.stringify(req.body));
+  let updatedTodos = TodoHandler.originTodos;
+
+  (req.body || []).forEach(todo => {
+    updatedTodos = TodoHandler.addTodo(todo);
+  });
+
+  res.json(updatedTodos);
+});
+
 app.post('/todo', function (req, res) {
   console.log(JSON.stringify(req.body));
-  const updatedTodos = TodoHandler.setTodo(req.body);
+  const updatedTodos = TodoHandler.addTodo(req.body);
   res.json(updatedTodos);
 });
 

@@ -4,7 +4,7 @@ const getUniqueID = () => {
   return '_' + Math.random().toString(36).substr(2, 9);
 };
 
-export const setTodo = todo => {
+export const addTodo = todo => {
   if(!todo.id) {
     todo.id = getUniqueID();
     originTodos.unshift(todo);

@@ -5,6 +5,7 @@ export interface TodoState {
 }
 
 export type TodoItem = {
+  id?: string,
   value: string,
   status: TODO_STATUS
 }
