@@ -51,10 +51,14 @@ module.exports = {
       { from: './public/manifest.json' },
       { from: './public/icon-512.png' },
     ]),
-    new WorkboxPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-      cleanupOutdatedCaches: true
+    // new WorkboxPlugin.GenerateSW({
+    //   clientsClaim: true,
+    //   skipWaiting: true,
+    //   cleanupOutdatedCaches: true
+    // })
+    new WorkboxPlugin.InjectManifest({
+      swSrc: './src-sw.js',
+      swDest: 'sw.js'
     })
   ],
 };

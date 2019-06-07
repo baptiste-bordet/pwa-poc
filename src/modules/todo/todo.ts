@@ -11,19 +11,27 @@ const initState = {
 };
 
 // ACTIONS
+const setTodos = createAction<TodoItem[]>(`${MODULE_NAME}/SET_TODOS`);
 const addTodo = createAction<TodoItem>(`${MODULE_NAME}/ADD_TODO`);
+const storeTodo = createAction<TodoItem>(`${MODULE_NAME}/STORE_TODO`);
 
 
 // REDUCERS
-const _addTodo = (state: TodoState, payload: TodoItem) =>
+const _setTodos = (state: TodoState, payload: TodoItem[]) =>
+  produce(state, draft => {
+    draft[T.todos] = payload;
+  });
+const _storeTodo = (state: TodoState, payload: TodoItem) =>
   produce(state, draft => {
     draft[T.todos].unshift(payload);
   });
 
 
 const reducer = createReducer({
-  [addTodo.toString()]: (state: TodoState, payload: any) =>
-    _addTodo(state, payload)
+  [setTodos.toString()]: (state: TodoState, payload: any) =>
+    _setTodos(state, payload),
+  [storeTodo.toString()]: (state: TodoState, payload: any) =>
+    _storeTodo(state, payload)
 }, initState);
 
 export default {
@@ -31,6 +39,8 @@ export default {
   reducer,
   selector,
   actions: {
-    addTodo
+    setTodos,
+    storeTodo,
+    addTodo,
   }
 }

@@ -9,6 +9,9 @@ import form from "../../modules/form/form";
 import { FORM_NAME } from "../../modules/form/constant";
 import CardItem from "@Components/CardItem";
 import Line from "@Components/Line";
+import axios from "axios";
+import { get } from 'lodash';
+
 
 interface ITodo {
   action: typeof todo.actions & typeof form.actions;
@@ -17,6 +20,17 @@ interface ITodo {
 }
 
 class Todo extends React.Component<ITodo> {
+
+  componentWillMount(): void {
+    const { action } = this.props;
+
+    axios.get('http://localhost:3000/todos')
+      .then((response: any) => {
+        action.setTodos(response.data)
+      }).catch((error: any) => {
+        console.log(error);
+    });
+  }
 
   handleSubmitTodo(e: any) {
     const { action, formValues } = this.props;

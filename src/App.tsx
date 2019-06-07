@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: #f1f1f1;
     padding: 20px 30%;
+    font-family: -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", "Roboto", "Oxygen", 
+    "Ubuntu", "Cantarell", "Fira Sans", 
+    "Droid Sans", "Helvetica Neue", sans-serif;
     
     @media (max-width: 700px) {
       padding: 20px 10px;
@@ -39,7 +43,7 @@ ReactDOM.render(
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js').then(registration => {
+    navigator.serviceWorker.register('/sw.js').then(registration => {
       console.info('SW registered: ', registration);
     }).catch(registrationError => {
       console.info('SW registration failed: ', registrationError);

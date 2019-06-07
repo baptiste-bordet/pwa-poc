@@ -1,5 +1,5 @@
 import { createAction, createReducer } from "redux-act";
-import { MODULE_NAME } from "./constant";
+import { FORM_NAME, MODULE_NAME } from "./constant";
 import { FormPayload, FormState } from "./model";
 import produce from "immer";
 import { get, set } from 'lodash';
@@ -7,6 +7,7 @@ import selector from './selector';
 
 
 const initState = {
+  [FORM_NAME.ADD_TODO]: { value: '' }
 };
 
 // ACTIONS
